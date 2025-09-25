@@ -1,0 +1,27 @@
+Zadanie 14.
+1)Wykonaj przycisk na stronie zaliczeniowej (Nazwisko_ucznia-Zadanie14)
+2) Wykonaj przycisk na stronie zaliczeniowej (Nazwisko_ucznia-Zadanie14-KOD)
+3)Przeczytaj treść zadania, rozwiąż to zadanie. (pamiętaj o odpowiednich nazwach)
+4)Dokonaj testowania zadania
+5)Podłącz plik zadanie14_kow.html do przycisku Nazwisko_ucznia-Zadanie14
+6)Podłącz plik zadanie14_kow_KOD.html do przycisku Nazwisko_ucznia-Zadanie14-KOD
+Temat: Rozkład ułamka egipskiego na trzy ułamki egipskie.
+Wskazówka:
+Rozłóż najpierw na dwa ułamki i następnie drugi lub pierwszy rozłóż na dwa a otrzymasz rozkład na trzy.
+Dane do sprawdzenia:
+m=4
+1/4=1/6 + 1/30 + 1/20
+
+Zadanie 15.
+1)Wykonaj przycisk na stronie zaliczeniowej (Nazwisko_ucznia-Zadanie15)
+2) Wykonaj przycisk na stronie zaliczeniowej (Nazwisko_ucznia-Zadanie15-KOD)
+3)Przeczytaj treść zadania, rozwiąż to zadanie. (pamiętaj o odpowiednich nazwach)
+4)Dokonaj testowania zadania
+5)Podłącz plik zadanie15_kow.html do przycisku Nazwisko_ucznia-Zadanie15
+6)Podłącz plik zadanie15_kow_KOD.html do przycisku Nazwisko_ucznia-Zadanie15-KOD
+Temat: Rozkład ułamka egipskiego na dwa takie same ułamki egipskie.
+Dane do sprawdzenia:
+m=3
+1/3=1/6 + 1/6
+m=7
+1/7=1/14+1/14
