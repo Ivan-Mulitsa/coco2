@@ -3,23 +3,35 @@ using namespace std;
 
 int main() {
 
-for (int i=0;i<=7;i++){
-	cout<<" "<<i;
-}
-cout<<endl;
-for (int i=0;i<=7*3+2;i++){
-	cout<<"=";
-}
-cout<<endl;
-for (int i=1;i<=7;i++){
-	
-	 for (int n = 1; n <= 7; n++) {
-            cout << i * n;
-    
-	cout<<i<<"|"<<endl;
-}
-}
-   
+    // Nagłówek kolumn
+    cout << "   ";
+    for (int i = 1; i <= 7; i++) {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    // Linia oddzielająca
+    cout << "  ";
+    for (int i = 1; i <= 15; i++) {
+        cout << "=";
+    }
+    cout << endl;
+
+    // Główna tabliczka mnożenia
+    for (int i = 1; i <= 7; i++) {
+        cout << i << "|";  // numer wiersza i pionowa kreska
+
+        for (int j = 1; j <= 7; j++) {
+            int wynik = i * j;
+
+            // proste wyrównanie: jeśli wynik < 10, dodaj spację
+            if (wynik < 10)
+                cout << " " << wynik << " ";
+            else
+                cout << wynik << " ";
+        }
+        cout << endl;
+    }
 
     return 0;
 }
