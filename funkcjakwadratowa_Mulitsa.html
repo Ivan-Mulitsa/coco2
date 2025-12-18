@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Trójmian kwadratowy</title>
+<style>
+  input { width: 50px; margin-right: 10px; }
+  button { margin: 5px 0; display: block; }
+  #wynik { margin-top: 20px; border: 1px solid #ccc; padding: 10px; width: 500px; }
+</style>
+</head>
+<body>
+<h2>Trójmian kwadratowy</h2>
+
+a: <input type="number" id="a_pus" value="1">
+b: <input type="number" id="b_pus" value="0">
+c: <input type="number" id="c_pus" value="0">
+
+<button onclick="pokazDelta()">Pokaż deltę i pierwiastki</button>
+<button onclick="pokazWierzch()">Pokaż wierzchołek</button>
+<button onclick="pokazKanoniczna()">Pokaż postać kanoniczną</button>
+<button onclick="pokazIloczynowa()">Pokaż postać iloczynową</button>
+<button onclick="pokazPrzedzialy()">Pokaż przedziały funkcji</button>
+<button onclick="pokazZbior()">Pokaż zbiór wartości</button>
+<button onclick="pokazZnak()">Pokaż znak funkcji</button>
+
+<div id="wynik"></div>
+
+<script>
+function pobierzWartosci() {
+    var a_pus = parseFloat(document.getElementById("a_pus").value);
+    var b_pus = parseFloat(document.getElementById("b_pus").value);
+    var c_pus = parseFloat(document.getElementById("c_pus").value);
+    return {a_pus: a_pus, b_pus: b_pus, c_pus: c_pus};
+}
+
+function pokazDelta() {
+    var vals = pobierzWartosci();
+    var a_pus = vals.a_pus, b_pus = vals.b_pus, c_pus = vals.c_pus;
+    var wynikDiv = document.getElementById("wynik");
+
+    if (a_pus === 0) { wynikDiv.innerHTML = "To nie jest funkcja kwadratowa"; return; }
+
+    var delta_pus = b_pus*b_pus - 4*a_pus*c_pus;
+    var x1_pus, x2_pus;
+    if (delta_pus > 0) {
+        x1_pus = (-b_pus - Math.sqrt(delta_pus)) / (2*a_pus);
+        x2_pus = (-b_pus + Math.sqrt(delta_pus)) / (2*a_pus);
+    } else if (delta_pus === 0) {
+        x1_pus = x2_pus = -b_pus / (2*a_pus);
+    } else {
+        x1_pus = x2_pus = "brak";
+    }
+
+    wynikDiv.innerHTML = "<b>Delta:</b> " + delta_pus + "<br>" +
+                         "<b>Pierwiastek 1:</b> " + x1_pus + "<br>" +
+                         "<b>Pierwiastek 2:</b> " + x2_pus;
+}
+
+function pokazWierzch() {
+    var vals = pobierzWartosci();
+    var a_pus = vals.a_pus, b_pus = vals.b_pus, c_pus = vals.c_pus;
+    var wynikDiv = document.getElementById("wynik");
+
+    var w_x_pus = -b_pus / (2*a_pus);
+    var w_y_pus = a_pus*w_x_pus*w_x_pus + b_pus*w_x_pus + c_pus;
+
+    wynikDiv.innerHTML = "<b>Wierzchołek:</b> [" + w_x_pus + " ; " + w_y_pus + "]";
+}
+
+function pokazKanoniczna() {
+    var vals = pobierzWartosci();
+    var a_pus = vals.a_pus, b_pus = vals.b_pus, c_pus = vals.c_pus;
+    var wynikDiv = document.getElementById("wynik");
+
+    var w_x_pus = -b_pus / (2*a_pus);
+    var w_y_pus = a_pus*w_x_pus*w_x_pus + b_pus*w_x_pus + c_pus;
+
+    var kanoniczna_pus = a_pus + "(x - " + w_x_pus + ")² " + (w_y_pus>=0?"+ ":"- ") + Math.abs(w_y_pus);
+    wynikDiv.innerHTML = "<b>Postać kanoniczna:</b> " + kanoniczna_pus;
+}
+
+function pokazIloczynowa() {
+    var vals = pobierzWartosci();
+    var a_pus = vals.a_pus, b_pus = vals.b_pus, c_pus = vals.c_pus;
+    var wynikDiv = document.getElementById("wynik");
+
+    var delta_pus = b_pus*b_pus - 4*a_pus*c_pus;
+    var iloczynowa_pus;
+    if (delta_pus > 0) {
+        var x1_pus = (-b_pus - Math.sqrt(delta_pus)) / (2*a_pus);
+        var x2_pus = (-b_pus + Math.sqrt(delta_pus)) / (2*a_pus);
+        iloczynowa_pus = a_pus + "(x - " + x1_pus + ")(x - " + x2_pus + ")";
+    } else if (delta_pus === 0) {
+        var x_pus = -b_pus / (2*a_pus);
+        iloczynowa_pus = a_pus + "(x - " + x_pus + ")²";
+    } else {
+        iloczynowa_pus = "brak miejsc zerowych";
+    }
+
+    wynikDiv.innerHTML = "<b>Postać iloczynowa:</b> " + iloczynowa_pus;
+}
+
+function pokazPrzedzialy() {
+    var vals = pobierzWartosci();
+    var a_pus = vals.a_pus, b_pus = vals.b_pus, c_pus = vals.c_pus;
+    var wynikDiv = document.getElementById("wynik");
+
+    var w_x_pus = -b_pus / (2*a_pus);
+    var przedzialy_pus = a_pus>0 ?
+        "maleje: (-oo ; " + w_x_pus + ") rośnie: (" + w_x_pus + " ; +oo)" :
+        "rośnie: (-oo ; " + w_x_pus + ") maleje: (" + w_x_pus + " ; +oo)";
+
+    wynikDiv.innerHTML = "<b>Przedziały funkcji:</b> " + przedzialy_pus;
+}
+
+function pokazZbior() {
+    var vals = pobierzWartosci();
+    var a_pus = vals.a_pus, b_pus = vals.b_pus, c_pus = vals.c_pus;
+    var wynikDiv = document.getElementById("wynik");
+
+    var w_x_pus = -b_pus / (2*a_pus);
+    var w_y_pus = a_pus*w_x_pus*w_x_pus + b_pus*w_x_pus + c_pus;
+    var zbior_pus = a_pus>0 ? "f(x) ≥ " + w_y_pus : "f(x) ≤ " + w_y_pus;
+
+    wynikDiv.innerHTML = "<b>Zbiór wartości:</b> " + zbior_pus;
+}
+
+function pokazZnak() {
+    var vals = pobierzWartosci();
+    var a_pus = vals.a_pus, b_pus = vals.b_pus, c_pus = vals.c_pus;
+    var wynikDiv = document.getElementById("wynik");
+
+    var delta_pus = b_pus*b_pus - 4*a_pus*c_pus;
+    var x1_pus, x2_pus, znak_pus;
+
+    if (delta_pus > 0) {
+        x1_pus = (-b_pus - Math.sqrt(delta_pus)) / (2*a_pus);
+        x2_pus = (-b_pus + Math.sqrt(delta_pus)) / (2*a_pus);
+        if (a_pus > 0) {
+            znak_pus = "f(x) > 0 dla x ∈ (-oo ; " + x1_pus + ") ∪ (" + x2_pus + " ; +oo)";
+        } else {
+            znak_pus = "f(x) > 0 dla x ∈ (" + x1_pus + " ; " + x2_pus + ")";
+        }
+    } else if (delta_pus === 0) {
+        x1_pus = -b_pus / (2*a_pus);
+        znak_pus = a_pus>0 ? "f(x) > 0 dla x ≠ " + x1_pus : "f(x) > 0 brak";
+    } else {
+        znak_pus = a_pus>0 ? "f(x) > 0 dla każdego x" : "f(x) < 0 dla każdego x";
+    }
+
+    wynikDiv.innerHTML = "<b>Znak funkcji:</b> " + znak_pus;
+}
+</script>
+
+</body>
+</html>
