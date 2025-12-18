@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Trójmian kwadratowy</title>
+</head>
+
+<body>
+
+<h2>Trójmian kwadratowy</h2>
+
+a: <input type="number" id="a_mul" value="1">
+b: <input type="number" id="b_mul" value="0">
+c: <input type="number" id="c_mul" value="0">
+
+<br><br>
+
+<button onclick="pokazDelta()">Pokaż deltę i pierwiastki</button><br>
+<button onclick="pokazWierzch()">Pokaż wierzchołek</button><br>
+<button onclick="pokazKanoniczna()">Pokaż postać kanoniczną</button><br>
+<button onclick="pokazIloczynowa()">Pokaż postać iloczynową</button><br>
+<button onclick="pokazPrzedzialy()">Pokaż przedziały funkcji</button><br>
+<button onclick="pokazZbior()">Pokaż zbiór wartości</button><br>
+<button onclick="pokazZnak()">Pokaż znak funkcji</button>
+
+<div id="wynik"></div>
+
+<script>
+function pobierzWartosci() {
+    return {
+        a_mul: parseFloat(document.getElementById("a_mul").value),
+        b_mul: parseFloat(document.getElementById("b_mul").value),
+        c_mul: parseFloat(document.getElementById("c_mul").value)
+    };
+}
+
+function wypisz(tekst) {
+    document.getElementById("wynik").innerHTML =
+        '<div style="color: green; font-size: 2cm;">' + tekst + '</div>';
+}
+
+function pokazDelta() {
+    var {a_mul, b_mul, c_mul} = pobierzWartosci();
+    if (a_mul === 0) {
+        wypisz("To nie jest funkcja kwadratowa");
+        return;
+    }
+
+    var delta = b_mul*b_mul - 4*a_mul*c_mul;
+    var x1, x2;
+
+    if (delta > 0) {
+        x1 = (-b_mul - Math.sqrt(delta)) / (2*a_mul);
+        x2 = (-b_mul + Math.sqrt(delta)) / (2*a_mul);
+    } else if (delta === 0) {
+        x1 = x2 = -b_mul / (2*a_mul);
+    } else {
+        x1 = x2 = "brak";
+    }
+
+    wypisz("Δ = " + delta + "<br>x₁ = " + x1 + "<br>x₂ = " + x2);
+}
+
+function pokazWierzch() {
+    var {a_mul, b_mul, c_mul} = pobierzWartosci();
+    var x = -b_mul / (2*a_mul);
+    var y = a_mul*x*x + b_mul*x + c_mul;
+    wypisz("Wierzchołek: (" + x + " ; " + y + ")");
+}
+
+function pokazKanoniczna() {
+    var {a_mul, b_mul, c_mul} = pobierzWartosci();
+    var x = -b_mul / (2*a_mul);
+    var y = a_mul*x*x + b_mul*x + c_mul;
+    wypisz("f(x) = " + a_mul + "(x − " + x + ")² " +
+           (y >= 0 ? "+ " : "- ") + Math.abs(y));
+}
+
+function pokazIloczynowa() {
+    var {a_mul, b_mul, c_mul} = pobierzWartosci();
+    var delta = b_mul*b_mul - 4*a_mul*c_mul;
+
+    if (delta > 0) {
+        var x1 = (-b_mul - Math.sqrt(delta)) / (2*a_mul);
+        var x2 = (-b_mul + Math.sqrt(delta)) / (2*a_mul);
+        wypisz("f(x) = " + a_mul + "(x − " + x1 + ")(x − " + x2 + ")");
+    } else if (delta === 0) {
+        var x = -b_mul / (2*a_mul);
+        wypisz("f(x) = " + a_mul + "(x − " + x + ")²");
+    } else {
+        wypisz("Brak miejsc zerowych");
+    }
+}
+
+function pokazPrzedzialy() {
+    var {a_mul, b_mul} = pobierzWartosci();
+    var x = -b_mul / (2*a_mul);
+    wypisz(a_mul > 0
+        ? "Maleje: (−∞ ; " + x + ")<br>Rośnie: (" + x + " ; +∞)"
+        : "Rośnie: (−∞ ; " + x + ")<br>Maleje: (" + x + " ; +∞)");
+}
+
+function pokazZbior() {
+    var {a_mul, b_mul, c_mul} = pobierzWartosci();
+    var x = -b_mul / (2*a_mul);
+    var y = a_mul*x*x + b_mul*x + c_mul;
+    wypisz(a_mul > 0 ? "f(x) ≥ " + y : "f(x) ≤ " + y);
+}
+
+function pokazZnak() {
+    var {a_mul, b_mul, c_mul} = pobierzWartosci();
+    var delta = b_mul*b_mul - 4*a_mul*c_mul;
+
+    if (delta > 0) {
+        var x1 = (-b_mul - Math.sqrt(delta)) / (2*a_mul);
+        var x2 = (-b_mul + Math.sqrt(delta)) / (2*a_mul);
+        wypisz(a_mul > 0
+            ? "f(x) > 0 dla x < " + x1 + " lub x > " + x2
+            : "f(x) > 0 dla " + x1 + " < x < " + x2);
+    } else if (delta === 0) {
+        var x = -b_mul / (2*a_mul);
+        wypisz(a_mul > 0
+            ? "f(x) ≥ 0, x ≠ " + x
+            : "f(x) ≤ 0");
+    } else {
+        wypisz(a_mul > 0
+            ? "f(x) > 0 dla każdego x"
+            : "f(x) < 0 dla każdego x");
+    }
+}
+</script>
+
+</body>
+</html>
